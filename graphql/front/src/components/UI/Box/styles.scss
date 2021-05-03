@@ -1,0 +1,13 @@
+@import "src/common/global-styles/colors.scss";
+
+.box {
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-base-grey;
+
+  &--sm {
+  }
+}

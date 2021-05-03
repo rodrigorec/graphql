@@ -1,0 +1,21 @@
+type Query {
+  item(id: ID!): Item
+  items: [Item]
+}
+
+type Item {
+  id: ID!
+  title: String!
+  description: String!
+}
+
+type Mutation {
+  createItem(input: CreateInputItem!): Item
+  deleteItem(id: ID!): String
+  updateItem(id: ID!, input: CreateInputItem!): Item
+}
+
+input CreateInputItem {
+  title: String!
+  description: String!
+}

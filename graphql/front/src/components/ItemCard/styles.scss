@@ -1,0 +1,26 @@
+// @import "../../common/global-styles/globals.scss";
+
+.item-card {
+  position: relative;
+
+  &__container {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    height: 64px;
+    border-radius: 5px;
+    padding: 14px;
+    box-sizing: border-box;
+    &__info {
+      display: flex;
+      flex-direction: column;
+      &__dsc {
+        font-size: 14px;
+        line-height: 16px;
+      }
+      &__subdsc {
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+  }
+}
