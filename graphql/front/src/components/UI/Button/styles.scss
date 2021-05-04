@@ -1,0 +1,17 @@
+@import "src/common/global-styles/colors.scss";
+
+.button {
+  background-color: $color-base-yellow;
+  font-size: 20px;
+  border: none;
+  color: $color-white;
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
+
+  &--sm {
+    font-size: 15px;
+    width: 60px;
+    height: 30px;
+  }
+}

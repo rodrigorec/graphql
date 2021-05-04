@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import cn from 'classnames';
 import { UseAddItem } from "src/hooks/useAddItem";
 import { UseUpdateItem } from "src/hooks/useUpdateItem";
 import { Item } from "src/model/item";
+import Heading from "src/components/UI/Heading";
+import "./styles.scss";
 
 interface ItemFormProps {
   className?: string;
@@ -23,33 +26,19 @@ const ItemForm: React.FC<ItemFormProps> = ({
   const [title, setTitle] = useState(item.title);
   const [description, setDescription] = useState(item.description);
 
-  const {
-    addItem,
-    data: addNewItemData,
-    loading: addNewItemLoading,
-    error: addNewItemError,
-  } = UseAddItem({
-    title,
-    description,
-  });
-
-  const {
-    updateItem,
-    data: updateNewItemData,
-    loading: updateNewItemLoading,
-    error: updateNewItemError,
-  } = UseUpdateItem(item.id, {
-    title,
-    description,
-  });
+  const { mutateItem, data, loading, error } = hasToAddItem
+    ? UseAddItem({
+        title,
+        description,
+      })
+    : UseUpdateItem(item.id, {
+        title,
+        description,
+      });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (hasToAddItem) {
-      addItem();
-    } else {
-      updateItem();
-    }
+    mutateItem();
     setTitle("");
     setDescription("");
   };
@@ -57,21 +46,16 @@ const ItemForm: React.FC<ItemFormProps> = ({
   const renderTitle = () => (hasToAddItem ? "Add" : "Update");
 
   useEffect(() => {
-    if (updateNewItemData?.updateItem) {
+    if (data && "updateItem" in data) {
       history.push("/");
     }
-  }, [updateNewItemData]);
+  }, [data, history]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>{`${renderTitle()} item`}</h3>
-      {addNewItemLoading || (updateNewItemLoading && <div>Loading...</div>)}
-      {addNewItemError || updateNewItemError ? (
-        <p>There was an error! {addNewItemError?.message || updateNewItemError?.message}</p>
-      ) : null}
-      {!hasToAddItem && (
-        <input type="text" disabled value={item.id} />
-      )}
+    <form className={cn('item-form', className)} onSubmit={handleSubmit}>
+      <Heading className='item-form__header'>{`${renderTitle()} item`}</Heading>
+      <div className='item-form__container'> 
+      {!hasToAddItem && <input type="text" disabled value={item.id} />}
       <input
         type="text"
         placeholder="Title"
@@ -93,6 +77,9 @@ const ItemForm: React.FC<ItemFormProps> = ({
         value={renderTitle()}
         disabled={title === "" || description === ""}
       />
+      {loading && <Heading>Loading...</Heading>}
+      {error && <Heading>There was an error!</Heading>}
+      </div>
     </form>
   );
 };

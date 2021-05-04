@@ -1,0 +1,15 @@
+@import "src/common/global-styles/colors.scss";
+
+.item-form {
+  margin: 0px 20px;
+  &__header {
+    margin: 20px 0px;
+  }
+
+  &__container {
+    margin-bottom: 20px;
+  }
+
+  &--sm {
+  }
+}

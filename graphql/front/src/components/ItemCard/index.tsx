@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import './styles.scss';
 import Box from 'src/components/UI/Box';
+import Button from 'src/components/UI/Button';
 
 interface ItemCardProps {
   className?: string;
@@ -23,9 +24,8 @@ const ItemCard: React.FC<ItemCardProps> = ({
         <span className="item-card__container__info__dsc">{title}</span>
         <span className="item-card__container__info__subdsc">{description}</span>
       </div>
-      <button onClick={onClickDetail}>Ver</button>
-      <button onClick={onClickDelete}>Delete</button>
-      {/* <Arrow onClick={onClickCard} /> */}
+      <Button handleClick={onClickDetail} text="Detail" />
+      <Button handleClick={onClickDelete} text="Delete" />
     </Box>
   </div>
 );

@@ -1,0 +1,10 @@
+@import "src/common/global-styles/colors.scss";
+
+.error {
+  color: $color-error;
+  font-weight: bold;
+
+  &--sm {
+    font-size: 15px;
+  }
+}

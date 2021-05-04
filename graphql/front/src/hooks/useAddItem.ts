@@ -8,7 +8,7 @@ import { CREATE_ITEM } from "src/graphql/operations/mutations/addItem";
 
 export const UseAddItem = (inputValues: CreateInputItem) => {
   const { title, description } = inputValues;
-  const [addItem, { error, data, loading }] = useMutation<
+  const [mutateItem, { error, data, loading }] = useMutation<
     createItem,
     createItemVariables
   >(CREATE_ITEM, {
@@ -32,7 +32,7 @@ export const UseAddItem = (inputValues: CreateInputItem) => {
   });
 
   return {
-    addItem,
+    mutateItem,
     data,
     error,
     loading,

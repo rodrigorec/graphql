@@ -1,9 +1,7 @@
+import Error from "src/components/Error";
+
 const NotFoundPage = () => {
-    return (
-      <div>
-       Not found.
-      </div>
-    );
+    return <Error text="Not found!"/>
   };
 
 export default NotFoundPage;

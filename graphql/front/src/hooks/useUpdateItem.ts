@@ -8,7 +8,7 @@ import { UPDATE_ITEM } from "src/graphql/operations/mutations/updateItem";
 
 export const UseUpdateItem = (id: string, inputValues: CreateInputItem) => {
   const { title, description } = inputValues;
-  const [updateItem, { error, data, loading }] = useMutation<
+  const [mutateItem, { error, data, loading }] = useMutation<
     updateItem,
     updateItemVariables
   >(UPDATE_ITEM, {
@@ -19,7 +19,7 @@ export const UseUpdateItem = (id: string, inputValues: CreateInputItem) => {
   });
 
   return {
-    updateItem,
+    mutateItem,
     data,
     error,
     loading,

@@ -8,7 +8,7 @@ import { GetItems } from "src/graphql/operations/queries/__generated__/GetItems"
 import { GET_ITEMS } from "src/graphql/operations/queries/getItemList";
 
 export const useDeleteItem = () => {
-  const [deleteItemFn, { error }] = useMutation<
+  const [deleteItem, { error }] = useMutation<
     deleteItem,
     deleteItemVariables
   >(DELETE_ITEM, {
@@ -32,7 +32,7 @@ export const useDeleteItem = () => {
   });
 
   return {
-    deleteItemFn,
+    deleteItem,
     error,
   };
 };
