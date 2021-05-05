@@ -1,10 +1,11 @@
 .item-card {
   position: relative;
+  height: fit-content;
 
   &__container {
+    min-height: 80px;
     flex-direction: row !important;
     justify-content: space-between !important;
-    height: 64px;
     border-radius: 5px;
     padding: 14px;
     box-sizing: border-box;
@@ -26,6 +27,7 @@
   &--sm {
     .item-card {
       &__container {
+        min-height: 120px;
         &__info {
           width: 100px;
           &__dsc {

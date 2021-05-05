@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import cn from 'classnames';
+import cn from "classnames";
 import { UseAddItem } from "src/hooks/useAddItem";
 import { UseUpdateItem } from "src/hooks/useUpdateItem";
 import { Item } from "src/model/item";
 import Heading from "src/components/UI/Heading";
 import "./styles.scss";
+import { getErrorMessage } from "src/utils/helpers";
+import Error from "src/components/Error";
 
 interface ItemFormProps {
   className?: string;
@@ -36,11 +38,20 @@ const ItemForm: React.FC<ItemFormProps> = ({
         description,
       });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    mutateItem();
-    setTitle("");
-    setDescription("");
+    try {
+      const result = await mutateItem();
+      if (
+        result.data &&
+        ("updateItem" in result.data || "createItem" in result.data)
+      ) {
+        setTitle("");
+        setDescription("");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const renderTitle = () => (hasToAddItem ? "Add" : "Update");
@@ -51,34 +62,35 @@ const ItemForm: React.FC<ItemFormProps> = ({
     }
   }, [data, history]);
 
+  if (error) return <Error text={getErrorMessage(error)} />;
+
   return (
-    <form className={cn('item-form', className)} onSubmit={handleSubmit}>
-      <Heading className='item-form__header'>{`${renderTitle()} item`}</Heading>
-      <div className='item-form__container'> 
-      {!hasToAddItem && <input type="text" disabled value={item.id} />}
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      />
-      <input
-        type="submit"
-        value={renderTitle()}
-        disabled={title === "" || description === ""}
-      />
-      {loading && <Heading>Loading...</Heading>}
-      {error && <Heading>There was an error!</Heading>}
+    <form className={cn("item-form", className)} onSubmit={handleSubmit}>
+      <Heading className="item-form__header">{`${renderTitle()} item`}</Heading>
+      <div className="item-form__container">
+        {!hasToAddItem && <input type="text" disabled value={item.id} />}
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
+        />
+        <input
+          type="submit"
+          value={renderTitle()}
+          disabled={title === "" || description === ""}
+        />
+        {loading && <Heading>Loading...</Heading>}
       </div>
     </form>
   );

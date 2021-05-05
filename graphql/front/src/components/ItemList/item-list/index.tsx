@@ -5,6 +5,8 @@ import { useDeleteItem } from "src/hooks/useDeleteItem";
 import cn from "classnames";
 import "./styles.scss";
 import ScreenSize from "src/hocs/ScreenSize";
+import Error from "src/components/Error";
+import { getErrorMessage } from "src/utils/helpers";
 
 interface ChildProps {
   itemList: Items;
@@ -20,7 +22,15 @@ const ItemList: React.FC<ChildProps> = ({
   const history = useHistory();
   const { deleteItem, error } = useDeleteItem();
 
-  if (error) return <div>Error</div>;
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteItem({ variables: { id } });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  if (error) return <Error text={getErrorMessage(error)} />;
 
   return (
     <div
@@ -35,10 +45,11 @@ const ItemList: React.FC<ChildProps> = ({
       {itemList.map(({ id, title, description }) => (
         <ItemCard
           key={id}
+          className="item-list__card"
           title={title}
           description={description}
           onClickDetail={() => history.push(`/item-detail/${id}`)}
-          onClickDelete={() => deleteItem({ variables: { id } })}
+          onClickDelete={() => handleDelete(id)}
         />
       ))}
     </div>
