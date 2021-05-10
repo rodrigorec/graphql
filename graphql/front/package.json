@@ -36,16 +36,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm test"
+            "pre-commit": "npm run test"
         }
-    },
-    "lint-staged": {
-        "*.{js,ts,tsx}": [
-            "eslint --quiet --fix"
-        ],
-        "*.{json,md,html}": [
-            "prettier --write"
-        ]
     },
     "eslintConfig": {
         "extends": [
