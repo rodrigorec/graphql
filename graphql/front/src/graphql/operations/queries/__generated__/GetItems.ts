@@ -8,12 +8,12 @@
 // ====================================================
 
 export interface GetItems_items {
-  __typename: "Item";
-  id: string;
-  title: string;
-  description: string;
+    __typename: 'Item';
+    id: string;
+    title: string;
+    description: string;
 }
 
 export interface GetItems {
-  items: (GetItems_items | null)[] | null;
+    items: (GetItems_items | null)[] | null;
 }

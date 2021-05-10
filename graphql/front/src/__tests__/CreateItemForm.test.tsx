@@ -2,7 +2,7 @@ import TestRenderer from 'react-test-renderer';
 import { MockedProvider } from '@apollo/client/testing';
 import { CREATE_ITEM } from 'src/graphql/operations/mutations/addItem';
 import { UseAddItem } from 'src/hooks/useAddItem';
-const { act } = TestRenderer;
+const { act } = TestRenderer
 
 const ItemFormTest = () => {
     const { mutateItem, data, loading } = UseAddItem({

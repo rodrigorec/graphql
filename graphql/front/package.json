@@ -28,15 +28,10 @@
         "build": "react-scripts build",
         "test": "react-scripts test --watchAll=false",
         "eject": "react-scripts eject",
-        "format": "prettier --write src/**/*.ts{,x}",
+        "format": "prettier --write \"src/**/*.{ts,tsx}\"",
         "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
         "download-schema": "apollo service:download --endpoint=http://localhost:9000/graphql/ graphql-schema.json",
         "generate": "npm run download-schema && apollo codegen:generate --localSchemaFile=graphql-schema.json --target=typescript --tagName=gql"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run test"
-        }
     },
     "eslintConfig": {
         "extends": [
@@ -63,10 +58,8 @@
         "apollo": "^2.32.13",
         "eslint": "^7.26.0",
         "eslint-config-airbnb": "^18.2.1",
-        "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-jsx-a11y": "^6.4.1",
-        "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-react": "^7.23.2",
         "eslint-plugin-react-hooks": "^1.7.0",
         "husky": "^6.0.0",

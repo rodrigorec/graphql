@@ -8,9 +8,9 @@
 // ====================================================
 
 export interface deleteItem {
-  deleteItem: string | null;
+    deleteItem: string | null;
 }
 
 export interface deleteItemVariables {
-  id: string;
+    id: string;
 }

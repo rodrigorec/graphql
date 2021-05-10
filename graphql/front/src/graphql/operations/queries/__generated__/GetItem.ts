@@ -8,16 +8,16 @@
 // ====================================================
 
 export interface GetItem_item {
-  __typename: "Item";
-  id: string;
-  title: string;
-  description: string;
+    __typename: 'Item';
+    id: string;
+    title: string;
+    description: string;
 }
 
 export interface GetItem {
-  item: GetItem_item | null;
+    item: GetItem_item | null;
 }
 
 export interface GetItemVariables {
-  id: string;
+    id: string;
 }
