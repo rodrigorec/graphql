@@ -7,7 +7,6 @@ import {
 import { GetItems } from 'src/graphql/operations/queries/__generated__/GetItems';
 import { GET_ITEMS } from 'src/graphql/operations/queries/getItemList';
 import { CREATE_ITEM } from 'src/graphql/operations/mutations/addItem';
-import useGetItem from './useGetItem';
 
 export const UseAddItem = (inputValues: CreateInputItem) => {
     const { title, description } = inputValues;
